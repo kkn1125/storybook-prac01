@@ -7,7 +7,7 @@ import {
 } from "react-router-dom/server";
 import routes from "./routes";
 
-export async function render(req: any) {
+export async function render(_req: any) {
   const { query, dataRoutes } = createStaticHandler(routes);
   const context = await query(new Request("https://naver.com"));
 
