@@ -5,15 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "node server",
+    "view:server": "cross-env NODE_ENV=production node server",
     "build": "tsc -b && vite build",
+    "build:all": "npm run build:client && npm run build:server",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "sirv": "^2.0.4"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
@@ -25,11 +34,13 @@
     "@storybook/react": "^8.2.2",
     "@storybook/react-vite": "^8.2.2",
     "@storybook/test": "^8.2.2",
+    "@types/compression": "^1.7.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
